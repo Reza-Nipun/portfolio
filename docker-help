@@ -1,0 +1,10 @@
+SSL Certificate Generation:
+mkcert blog.local "*.blog.local" localhost 127.0.0.1
+
+docker-compose up --build -d
+
+docker ps -a
+
+docker-compose logs -f <container_name>
+
+docker-compose down

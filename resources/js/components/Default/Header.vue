@@ -37,7 +37,7 @@
             </li> -->
             <li><a class="nav-link scrollto" href="#contact" v-on:click="removehash()">Contact</a></li>
             <li><router-link :to="'/nipun'" target="_blank">Sample</router-link></li>
-            <li><a class="nav-link scrollto" href="#contact" v-on:click="removehash()"><i class="bi bi-lock"></i> Login</a></li>
+            <li><a class="nav-link scrollto" href="#contact" v-on:click="removehash()">Login<i class="bi bi-lock"></i></a></li>
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
@@ -50,10 +50,10 @@
           <img src="/assets/img/portfolio-1.jpeg" class="d-block w-100" alt="">
         </div>
         <div class="carousel-item">
-          <img src="/assets/img/portfolio-2.png" class="d-block w-100" alt="...">
+          <img src="/assets/img/portfolio-2.png" class="d-block w-100" alt="">
         </div>
         <div class="carousel-item">
-          <img src="/assets/img/portfolio-3.jpg" class="d-block w-100" alt="...">
+          <img src="/assets/img/portfolio-3.jpg" class="d-block w-100" alt="">
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">

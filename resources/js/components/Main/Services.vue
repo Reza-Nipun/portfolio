@@ -26,7 +26,7 @@
                   <h2 class="s-title">{{ service.company_name }}</h2>
                   <p class="s-description text-center">{{ service.designation }} <span v-if="getServiceType(service.type)">( {{ getServiceType(service.type) }} )</span></p>
                   <div class="s-description text-center">
-                    <p v-if="service.is_continuing">{{ service.from_date }} to Present</p>
+                    <p v-if="service.is_continuing == 1">{{ service.from_date }} to Present</p>
                     <p v-else>{{ service.from_date }} to {{ service.to_date }}</p>
                     </div>
                 </div>

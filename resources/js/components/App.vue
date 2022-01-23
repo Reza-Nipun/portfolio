@@ -35,6 +35,10 @@ export default {
   },
   mounted() {
     // console.log("Component mounted.");
+    
   },
+  created(){
+    this.$store.commit('getUserInfo');
+  }
 };
 </script>

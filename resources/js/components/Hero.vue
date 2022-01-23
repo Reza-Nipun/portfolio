@@ -3,14 +3,14 @@
       <div
       id="home"
       class="hero route bg-image"
-      v-bind:style="{ backgroundImage: 'url(' + cover_photo + ')' }"
+      v-bind:style="{ backgroundImage: 'url(' + $store.state.user_info.cover_photo + ')' }"
     >
       <div class="overlay-itro"></div>
       <div class="hero-content display-table">
         <div class="table-cell">
           <div class="container">
             <!--<p class="display-6 color-d">Hello, world!</p>-->
-            <h1 class="hero-title mb-4" v-if="this.name">I am {{ this.name }}</h1>
+            <h1 class="hero-title mb-4" v-if="$store.state.user_info.name">I am {{ $store.state.user_info.name }}</h1>
             <div class="row">
               <div class="col-sm col-md col-lg">
                 <p class="hero-subtitle">
@@ -18,10 +18,10 @@
                 </p>
               </div>
             </div>
-            <div class="row" v-if="user.resume">
+            <div class="row" v-if="$store.state.user_info.resume">
               <div class="col-sm col-md col-lg">
                 <p class="hero-subtitle">
-                  <a v-bind:href="user.resume" target="_blank" class="btn btn-success">GET MY RESUME <i class="bi bi-download"></i></a>
+                  <a v-bind:href="$store.state.user_info.resume" target="_blank" class="btn btn-success">GET MY RESUME <i class="bi bi-download"></i></a>
                 </p>
               </div>
             </div>
@@ -47,28 +47,20 @@ export default {
       return {
         user_name: this.$route.params.user_name ?? null,
         user: {},
-        name: null,
-        cover_photo: null,
-        tags: [],
-        typed: ''
       }
     },
     created(){
       if(this.user_name){
         axios.get('/api/user/'+this.user_name).then((response) => {
             this.user = response.data
-            this.name = this.user.name
-            this.cover_photo = this.user.cover_photo
 
             // Getting Tags
             this.getTags()
         })
       }
-
     },
     methods:{
-      getTags(){
-        
+      getTags(){        
         axios.get('/api/tags/'+this.user.id).then((response) => {
           
             var data = response.data
@@ -86,7 +78,7 @@ export default {
         })
 
       },
-    },
+    }
 }
 </script>
 

@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import Routes from './routes'
 import { store } from './store/store'
 import VueMeta from 'vue-meta'
+import { sync } from 'vuex-router-sync'
 
 require('./bootstrap');
 
@@ -16,6 +17,8 @@ const router = new VueRouter({
     mode: 'history'
 })
 
+const unsync = sync(store, router)
+
 const app = new Vue({
     store: store,
     el: '#app',
@@ -24,3 +27,5 @@ const app = new Vue({
     },
     router: router
 });
+
+unsync();

@@ -33,7 +33,7 @@
                       <div class="w-more">
                         <!-- <span class="w-ctegory">Organisation Name</span> -->
                         <p v-if="certificate.score_achievement">{{ certificate.score_achievement }}</p>
-                        <p v-if="certificate.is_continuing">{{ certificate.from_date }} to Present</p>
+                        <p v-if="certificate.is_continuing == 1">{{ certificate.from_date }} to Present</p>
                         <p v-else>{{ certificate.from_date }} to {{ certificate.to_date }}</p>
                       </div>
                     </div>

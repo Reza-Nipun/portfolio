@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>DevFolio Bootstrap Portfolio Template - Index</title>
+        <title>Portfolio - TechExpertsBD</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 

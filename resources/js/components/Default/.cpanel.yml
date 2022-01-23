@@ -1,5 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/streekmc/portfolio.techexpertsbd.com/
-    - /bin/cp * $DEPLOYPATH

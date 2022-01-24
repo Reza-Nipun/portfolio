@@ -25,7 +25,7 @@ class CreateServicesTable extends Migration
             $table->date('from_date');
             $table->date('to_date');
             $table->integer('is_continuing')->comment('0=No, 1=Yes');
-            $table->integer('type')->comment('0=Full-Time, 1=Part-Time, 3=Contructual');
+            $table->integer('type')->comment('0=Full-Time, 1=Part-Time, 2=Freelancing, 3=Contructual');
             $table->longtext('job_description')->nullable();
             $table->timestamps();
 

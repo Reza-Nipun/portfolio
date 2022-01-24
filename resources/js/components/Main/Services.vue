@@ -24,7 +24,7 @@
                 </div>
                 <div class="service-content">
                   <h2 class="s-title">{{ service.company_name }}</h2>
-                  <p class="s-description text-center">{{ service.designation }} <span v-if="getServiceType(service.type)">( {{ getServiceType(service.type) }} )</span></p>
+                  <p class="s-description text-center">{{ service.designation }} <span v-if="service.type == 0">( Full-Time )</span><span v-if="service.type == 1">( Part-Time )</span><span v-if="service.type == 2">( Freelancing )</span><span v-if="service.type == 3">( Contructual )</span></p>
                   <div class="s-description text-center">
                     <p v-if="service.is_continuing == 1">{{ service.from_date }} to Present</p>
                     <p v-else>{{ service.from_date }} to {{ service.to_date }}</p>
@@ -49,19 +49,7 @@ export default {
 
     },
     methods:{
-      getServiceType(service_type){
-        switch(service_type) {
-          case 0:
-            return 'Full-Time'
-            break;
-          case 1:
-            return 'Part-Time'
-            break;
-          case 2:
-            return 'Contructual'
-            break;
-        }
-      }
+      
     },
 }
 </script>

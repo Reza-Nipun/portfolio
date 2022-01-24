@@ -1,11 +1,11 @@
 <template>
   <div>
-      <section id="blog" class="blog-mf sect-pt4 route" v-if="blogs.length">
+      <section id="blog" class="blog-mf sect-pt4 route" v-if="$store.state.blogs.length">
         <div class="container">
           <div class="row">
             <div class="col-sm-12">
               <div class="title-box text-center">
-                <h3 class="title-a">Blog</h3>
+                <h3 class="title-a">Blog {{ $store.state.blogs.length }}</h3>
                 <p class="subtitle-a">
                   <!-- Lorem ipsum, dolor sit amet consectetur adipisicing elit. -->
                 </p>
@@ -14,11 +14,11 @@
             </div>
           </div>
           <div class="row justify-content-center">
-            <div class="col-md-4" v-for="(blog, index) in blogs" :key="index">
+            <div class="col-md-4" v-for="(blog, index) in $store.state.blogs" :key="index">
               <div class="card card-blog">
                 <div class="card-img">
-                  <a href="blog-single.html"
-                    ><img src="assets/img/post-3.jpg" alt="" class="img-fluid" id="blog_img"
+                  <a v-bind:href=blog.blog_url target="_blank"
+                    ><img v-bind:src=blog.blog_image alt="" class="img-fluid" id="blog_img"
                   /></a>
                 </div>
                 <div class="card-body">
@@ -28,7 +28,7 @@
                     </div>
                   </div>
                   <h3 class="card-title">
-                    <a href="blog-single.html" v-if="blog.title">{{ blog.title }}</a>
+                    <a v-bind:href=blog.blog_url target="_blank" v-if="blog.title">{{ blog.title }}</a>
                     <span class="bi bi-link-45deg"></span>
                   </h3>
                   <p class="card-description" v-if="blog.description">

@@ -14,7 +14,7 @@
             </div>
           </div>
           <div class="row justify-content-center">
-            <div class="col-md-4" v-for="portfolio in portfolios" :key="portfolio.index">
+            <div class="col-md-4" v-for="portfolio in $store.state.portfolios" :key="portfolio.index">
               <div class="work-box">
                 <a
                   href="assets/img/work-1.jpg"
@@ -54,32 +54,14 @@
 export default {
   data(){
     return {
-      user_name: this.$route.params.user_name ?? null,
-      user: {},
-      portfolios: {},
+      
     }
   },
   created(){
-    if(this.user_name){
-      axios.get('/api/user/'+this.user_name).then((response) => {
-          this.user = response.data
-
-          // Getting Portfolios
-          this.getPortfolios()
-      })
-    }
 
   },
   methods:{
-    getPortfolios(){
 
-      axios.get('/api/portfolios/'+this.user.id).then((response) => {
-        
-          this.portfolios = response.data
-
-      })
-
-    },
   },
 }
 </script>

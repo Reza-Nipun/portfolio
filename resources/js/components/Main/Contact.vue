@@ -101,22 +101,22 @@
                           Besides, you can reach me in below contact details.
                         </p>
                         <ul class="list-ico">
-                          <li v-if="user.address">
+                          <li v-if="$store.state.user_info.address">
                             <span class="bi bi-geo-alt"></span> 
-                            {{ this.user.address }}
+                            {{ $store.state.user_info.address }}
                           </li>
-                          <li v-if="user.phone_number">
-                            <span class="bi bi-phone"></span> {{ this.user.phone_number }}
+                          <li v-if="$store.state.user_info.phone_number">
+                            <span class="bi bi-phone"></span> {{ $store.state.user_info.phone_number }}
                           </li>
-                          <li v-if="user.email">
+                          <li v-if="$store.state.user_info.email">
                             <span class="bi bi-envelope"></span>
-                            {{ this.user.email }}
+                            {{ $store.state.user_info.email }}
                           </li>
                         </ul>
                       </div>
                       <div class="socials">
                         <ul>
-                          <li v-for="link in links" :key="link.index">
+                          <li v-for="link in $store.state.links" :key="link.index">
                             <a v-bind:href="link.url_link" target="_blank">
                               <span class="ico-circle">
                                 <i v-if="link.link_type == 0" class="bi bi-stack-overflow"></i>
@@ -144,30 +144,14 @@
 export default {
     data(){
       return {
-        user_name: this.$route.params.user_name ?? null,
-        user: {},
-        links: {}
+        
       }
     },
     created(){
-      if(this.user_name){
-        axios.get('/api/user/'+this.user_name).then((response) => {
-          
-            this.user = response.data
-          
-            this.getLinks()
-        })
-      }
 
     },
     methods:{
-      getLinks(){
-        axios.get('/api/links/'+this.user.id).then((response) => {
-            
-            this.links = response.data
-
-        })
-      }
+      
     }
 }
 </script>

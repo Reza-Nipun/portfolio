@@ -14,7 +14,7 @@
             </div>
           </div>
           <div class="row justify-content-center">
-            <div class="col-md-4" v-for="certificate in certificates" :key="certificate.index">
+            <div class="col-md-4" v-for="certificate in $store.state.certificates" :key="certificate.index">
               <div class="work-box">
                 <!-- <a
                   href="assets/img/work-5.jpg"
@@ -51,32 +51,14 @@
 export default {
     data(){
       return {
-        user_name: this.$route.params.user_name ?? null,
-        user: {},
-        certificates: {},
+        
       }
     },
     created(){
-      if(this.user_name){
-        axios.get('/api/user/'+this.user_name).then((response) => {
-            this.user = response.data
-
-            // Getting Certificates
-            this.getCertificates()
-        })
-      }
-
+      
     },
     methods:{
-      getCertificates(){
-
-        axios.get('/api/certificates/'+this.user.id).then((response) => {
-          
-            this.certificates = response.data
-
-        })
-
-      }
+      
     },
 }
 </script>

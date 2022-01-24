@@ -24,6 +24,7 @@ import Header from './Header.vue';
 import Hero from './Hero.vue';
 import Main from './Main.vue';
 import Footer from './Footer.vue';
+import { mapActions } from 'vuex';
 
 
 export default {
@@ -33,12 +34,28 @@ export default {
     'Main': Main,
     'Footer': Footer,
   },
+  computed: {
+    userId() {
+      return this.$store.getters["getUserId"]
+    }
+  },
   mounted() {
     // console.log("Component mounted.");
-    
   },
   created(){
-    this.$store.commit('getUserInfo');
+    this.getUserInfo()
+
+    setTimeout(() => {
+      this.getUserSkills(this.$store.getters["getUserId"]);
+      this.getUserCertificates(this.$store.getters["getUserId"]);
+      this.getUserServices(this.$store.getters["getUserId"]);
+      this.getUserPortfolios(this.$store.getters["getUserId"]);
+      this.getUserLinks(this.$store.getters["getUserId"]);
+      this.getUserBlogs(this.$store.getters["getUserId"]);
+    }, 3000);
+  },
+  methods:{
+    ...mapActions(["getUserInfo", "getUserSkills", "getUserCertificates", "getUserServices", "getUserPortfolios", "getUserLinks", "getUserBlogs"]),
   }
 };
 </script>

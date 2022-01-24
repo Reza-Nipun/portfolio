@@ -48,7 +48,7 @@
                   <div class="col-md-6">
                     <div class="skill-mf">
                       <p class="title-s">Skill</p>
-                      <div v-for="skill in skills" :key="skill.index">
+                      <div v-for="skill in $store.state.skills" :key="skill.index">
                         <span>{{ skill.skill }}</span> - <span class="pull-right">{{ skill.score }}%</span>
                         <div class="progress">
                           <div
@@ -72,36 +72,14 @@
 </template>
 
 <script>
-export default {
-    data(){
-      return {
-        user_name: this.$route.params.user_name ?? null,
-        user: {},
-        skills: {},
-      }
-    },
-    created(){
-      if(this.user_name){
-        axios.get('/api/user/'+this.user_name).then((response) => {
-          
-            this.user = response.data
-                      
-            // Getting Tags
-            this.getSkills()
-        })
-      }
+import { mapActions } from 'vuex'
 
+export default {
+    created(){
+       
     },
     methods:{
-      getSkills(){
-
-        axios.get('/api/skills/'+this.user.id).then((response) => {
-          
-            this.skills = response.data
-
-        })
-
-      }
+      
     },
 }
 </script>

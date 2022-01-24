@@ -14,7 +14,7 @@
             </div>
           </div>
           <div class="row justify-content-center">
-            <div class="col-md-4" v-for="service in services" :key="service.index">
+            <div class="col-md-4" v-for="service in $store.state.services" :key="service.index">
               <div class="service-box">
                 <div class="service-ico">
                   <span class="ico-circle">
@@ -40,34 +40,15 @@
 
 <script>
 export default {
-data(){
+    data(){
       return {
-        user_name: this.$route.params.user_name ?? null,
-        user: {},
-        services: {},
+        
       }
     },
     created(){
-      if(this.user_name){
-        axios.get('/api/user/'+this.user_name).then((response) => {
-            this.user = response.data
-
-            // Getting Services
-            this.getServices()
-        })
-      }
 
     },
     methods:{
-      getServices(){
-
-        axios.get('/api/services/'+this.user.id).then((response) => {
-          
-            this.services = response.data
-
-        })
-
-      },
       getServiceType(service_type){
         switch(service_type) {
           case 0:

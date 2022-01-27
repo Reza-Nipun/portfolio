@@ -37,7 +37,7 @@
             </li> -->
             <li><a class="nav-link scrollto" href="#contact" v-on:click="removehash()">Contact</a></li>
             <li><router-link :to="'/nipun'" target="_blank">Sample</router-link></li>
-            <li><a class="nav-link scrollto" href="#contact" v-on:click="removehash()">Login<i class="bi bi-lock"></i></a></li>
+            <li><router-link class="nav-link scrollto" to="/login">Login<i class="bi bi-lock"></i></router-link></li>
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>

@@ -15,7 +15,7 @@ export default {
     'Header': Header,
   },
   mounted() {
-    console.log("Default Component mounted.");
+    // console.log("Default Component mounted.");
   },
 };
 </script>

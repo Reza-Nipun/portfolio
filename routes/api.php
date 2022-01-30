@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\UserAuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LinksController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ServiceController;
@@ -36,6 +37,7 @@ Route::get('/links/{user_id}', [LinksController::class,'userLinks']);
 Route::get('/certificates/{user_id}', [CertificateController::class,'userCertificates']);
 Route::get('/portfolios/{user_id}', [PortfolioController::class,'userPortfolios']);
 Route::get('/blogs/{user_id}', [BlogController::class,'userBlogs']);
+Route::post('/send_message', [ContactController::class,'senderMessage']);
 
 Route::middleware('auth:api')->group(function () {
     Route::get('/users', [UserAuthController::class,'users']);

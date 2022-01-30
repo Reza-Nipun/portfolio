@@ -31,6 +31,7 @@
                                   name="name"
                                   class="form-control"
                                   id="name"
+                                  v-model="data.name"
                                   placeholder="Your Name"
                                   required
                                 />
@@ -43,6 +44,7 @@
                                   class="form-control"
                                   name="email"
                                   id="email"
+                                  v-model="data.email"
                                   placeholder="Your Email"
                                   required
                                 />
@@ -55,6 +57,7 @@
                                   class="form-control"
                                   name="subject"
                                   id="subject"
+                                  v-model="data.subject"
                                   placeholder="Subject"
                                   required
                                 />
@@ -66,25 +69,26 @@
                                   class="form-control"
                                   name="message"
                                   rows="5"
+                                  v-model="data.message"
                                   placeholder="Message"
                                   required
                                 ></textarea>
                               </div>
                             </div>
                             <div class="col-md-12 text-center my-3">
-                              <div class="loading">Loading</div>
-                              <div class="error-message"></div>
-                              <div class="sent-message">
-                                Your message has been sent. Thank you!
+                              <div class="loading" v-if="loading == true">Loading</div>
+                              <div class="error-message" v-if="error != ''">{{ error }}</div>
+                              <div class="sent-message" v-if="success_msg != ''">
+                                {{ success_msg }}
                               </div>
                             </div>
                             <div class="col-md-12 text-center">
-                              <button
-                                type="submit"
+                              <span
                                 class="button button-a button-big button-rouded"
+                                v-on:click="sendMessage()"
                               >
                                 Send Message
-                              </button>
+                              </span>
                             </div>
                           </div>
                         </form>
@@ -144,14 +148,52 @@
 export default {
     data(){
       return {
-        
+        data: {
+          user_id: '',
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
+        },
+        success_msg: '',
+        error: '',
+        loading: false,
       }
     },
     created(){
 
+    setTimeout(() => {
+        this.data.user_id = this.$store.getters["getUserId"];
+    }, 5000);
+    
     },
     methods:{
-      
+      async sendMessage() {
+        if(this.data.email === '' || this.data.name === ''){
+          this.error = 'Please enter your Name & Email Address!';
+        }else if(this.data.user_id === '' || this.data.user_id === null){
+          this.error = 'Please User ID not found!';
+        }else{
+          this.loading = true;
+          const response = await axios.post('api/send_message', this.data);
+
+          if(response.data.error_message){
+            this.error = response.data.error_message
+            this.success_msg = ''
+            this.loading = false
+          }else{
+            this.error = ''
+            this.success_msg = response.data.message
+            this.loading = false
+
+            this.data.name = ''
+            this.data.email = ''
+            this.data.subject = ''
+            this.data.message = ''
+          }
+
+        }
+      }
     }
 }
 </script>

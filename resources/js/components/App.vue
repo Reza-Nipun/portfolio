@@ -52,7 +52,7 @@ export default {
       this.getUserPortfolios(this.$store.getters["getUserId"]);
       this.getUserLinks(this.$store.getters["getUserId"]);
       this.getUserBlogs(this.$store.getters["getUserId"]);
-    }, 3000);
+    }, 5000);
   },
   methods:{
     ...mapActions(["getUserInfo", "getUserSkills", "getUserCertificates", "getUserServices", "getUserPortfolios", "getUserLinks", "getUserBlogs"]),

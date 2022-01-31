@@ -78,9 +78,7 @@
                             <div class="col-md-12 text-center my-3">
                               <div class="loading" v-if="loading == true">Loading</div>
                               <div class="error-message" v-if="error != ''">{{ error }}</div>
-                              <div class="sent-message" v-if="success_msg != ''">
-                                {{ success_msg }}
-                              </div>
+                              <div class="sent-message" v-if="success_msg != ''">{{ success_msg }}</div>
                             </div>
                             <div class="col-md-12 text-center">
                               <span

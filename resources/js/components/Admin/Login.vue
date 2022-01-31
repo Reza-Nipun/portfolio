@@ -58,9 +58,7 @@
                         <div class="col-md-12 text-center my-3">
                           <div class="loading" v-if="loading == true">Loading</div>
                           <div class="error-message" v-if="error != ''"> {{ error }}</div>
-                          <div class="sent-message">
-                            Your message has been sent. Thank you!
-                          </div>
+                          <div class="sent-message" v-if="success_msg != ''">{{ success_msg }}</div>
                         </div>
                         <div class="row">
                           <div class="col-md-12 mb-3">
@@ -122,6 +120,7 @@ export default {
         email: '',
         password: '',
       },
+      success_msg: '',
       error: '',
       loading: false,
     }

@@ -41,9 +41,6 @@ export default {
   },
   mounted() {
     // console.log("Component mounted.");
-  },
-  created(){
-    this.getUserInfo()
 
     setTimeout(() => {
       this.getUserSkills(this.$store.getters["getUserId"]);
@@ -53,6 +50,9 @@ export default {
       this.getUserLinks(this.$store.getters["getUserId"]);
       this.getUserBlogs(this.$store.getters["getUserId"]);
     }, 5000);
+  },
+  created(){
+    this.getUserInfo()
   },
   methods:{
     ...mapActions(["getUserInfo", "getUserSkills", "getUserCertificates", "getUserServices", "getUserPortfolios", "getUserLinks", "getUserBlogs"]),

@@ -56,5 +56,11 @@ export const store = new Vuex.Store({
         const response = await axios.get('/api/blogs/'+user_id);
         commit('SET_BLOGS', response.data);
       },
+      async sendMessage({}, data) {
+        return await axios.post('api/send_message', data)
+      },
+      async login({}, data) {
+        return await axios.post('api/login', data)
+      }
     },
 })

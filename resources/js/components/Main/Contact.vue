@@ -166,31 +166,35 @@ export default {
     
     },
     methods:{
-      async sendMessage() {
+      sendMessage() {
+
         if(this.data.email === '' || this.data.name === ''){
+          this.success_msg = ''
           this.error = 'Please enter your Name & Email Address!';
         }else if(this.data.user_id === '' || this.data.user_id === null){
+          this.success_msg = ''
           this.error = 'Please User ID not found!';
         }else{
           this.loading = true;
-          const response = await axios.post('api/send_message', this.data);
+          
+          this.$store.dispatch('sendMessage', this.data).then((response) => {
+              if(response.data.error_message){
+                this.error = response.data.error_message
+                this.success_msg = ''
+                this.loading = false
+              }else{
+                this.error = ''
+                this.success_msg = response.data.message
+                this.loading = false
 
-          if(response.data.error_message){
-            this.error = response.data.error_message
-            this.success_msg = ''
-            this.loading = false
-          }else{
-            this.error = ''
-            this.success_msg = response.data.message
-            this.loading = false
-
-            this.data.name = ''
-            this.data.email = ''
-            this.data.subject = ''
-            this.data.message = ''
-          }
-
+                this.data.name = ''
+                this.data.email = ''
+                this.data.subject = ''
+                this.data.message = ''
+              }
+          })
         }
+
       }
     }
 }

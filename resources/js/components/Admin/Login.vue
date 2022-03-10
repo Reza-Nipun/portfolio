@@ -131,18 +131,17 @@ export default {
         this.error = 'Please enter Email Address & Password!';
       }else{
         this.loading = true;
-        const response = await axios.post('api/login', this.data);
 
-        if(response.data.error_message){
-          this.error = response.data.error_message
-          console.log(this.error)
-          this.loading = false;
-        }else{
-          console.log(response.data)
-          this.error = ''
-          this.loading = false;
-        }
-
+        this.$store.dispatch('login', this.data).then((response) => {
+            if(response.data.error_message){
+              this.error = response.data.error_message
+              this.loading = false;
+            }else{
+              console.log(response.data)
+              this.error = ''
+              this.loading = false;
+            }
+        })
       }
     }
   }

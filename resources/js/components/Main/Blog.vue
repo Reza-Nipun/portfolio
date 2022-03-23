@@ -69,7 +69,7 @@ export default {
   },
   created(){
     if(this.user_name){
-      axios.get('/api/user/'+this.user_name).then((response) => {
+      axios.get('/user/'+this.user_name).then((response) => {
           this.user = response.data
 
           // Getting Blogs
@@ -81,7 +81,7 @@ export default {
   methods:{
     getBlogs(){
 
-      axios.get('/api/blogs/'+this.user.id).then((response) => {
+      axios.get('/blogs/'+this.user.id).then((response) => {
         
           this.blogs = response.data
 

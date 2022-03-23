@@ -16,6 +16,33 @@ const router = new VueRouter({
     mode: 'history'
 })
 
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+      
+      if (!store.getters.loggedIn) {
+        next({
+          name: 'Login'
+        })
+        location.reload();
+      } else {
+        next()
+      }
+    } else if (to.matched.some(record => record.meta.visitor)) {
+      
+        if (store.getters.loggedIn) {
+          next({
+            name: 'Dashboard'
+          })
+          location.reload();
+        } else {
+          next()
+        }
+      }
+    else {
+      next()
+    }
+  })
+
 const unsync = sync(store, router)
 
 const app = new Vue({

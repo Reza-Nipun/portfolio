@@ -51,7 +51,7 @@ export default {
     },
     created(){
       if(this.user_name){
-        axios.get('/api/user/'+this.user_name).then((response) => {
+        axios.get('/user/'+this.user_name).then((response) => {
             this.user = response.data
 
             // Getting Tags
@@ -61,7 +61,7 @@ export default {
     },
     methods:{
       getTags(){        
-        axios.get('/api/tags/'+this.user.id).then((response) => {
+        axios.get('/tags/'+this.user.id).then((response) => {
           
             var data = response.data
 

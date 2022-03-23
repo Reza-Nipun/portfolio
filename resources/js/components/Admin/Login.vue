@@ -140,10 +140,22 @@ export default {
               console.log(response.data)
               this.error = ''
               this.loading = false;
+
+              if(response.data.token){
+                // save the token
+                localStorage.setItem(
+                  'portfolio_token',
+                  response.data.token
+                )
+
+                this.$store.dispatch('setToken', response.data.token)
+
+                window.location.replace('/dashboard/home')
+              }
             }
         })
       }
-    }
+    },
   }
 }
 </script>

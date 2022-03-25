@@ -41,21 +41,13 @@ export default {
   },
   mounted() {
     // console.log("Component mounted.");
-
-    setTimeout(() => {
-      this.getUserSkills(this.$store.getters["getUserId"]);
-      this.getUserCertificates(this.$store.getters["getUserId"]);
-      this.getUserServices(this.$store.getters["getUserId"]);
-      this.getUserPortfolios(this.$store.getters["getUserId"]);
-      this.getUserLinks(this.$store.getters["getUserId"]);
-      this.getUserBlogs(this.$store.getters["getUserId"]);
-    }, 5000);
+    this.getUserInfo();
   },
   created(){
-    this.getUserInfo()
+    
   },
   methods:{
-    ...mapActions(["getUserInfo", "getUserSkills", "getUserCertificates", "getUserServices", "getUserPortfolios", "getUserLinks", "getUserBlogs"]),
+    ...mapActions(["getUserInfo"]),
   }
 };
 </script>

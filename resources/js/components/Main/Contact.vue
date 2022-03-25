@@ -158,15 +158,15 @@ export default {
         loading: false,
       }
     },
+    mounted(){
+      
+    },
     created(){
-
-    setTimeout(() => {
-        this.data.user_id = this.$store.getters["getUserId"];
-    }, 5000);
     
     },
     methods:{
       sendMessage() {
+        this.data.user_id = this.$store.getters["getUserId"];
 
         if(this.data.email === '' || this.data.name === ''){
           this.success_msg = ''

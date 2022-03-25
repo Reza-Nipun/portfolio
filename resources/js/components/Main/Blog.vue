@@ -67,7 +67,7 @@ export default {
       blogs: {},
     }
   },
-  created(){
+  mounted() {
     if(this.user_name){
       axios.get('/user/'+this.user_name).then((response) => {
           this.user = response.data
@@ -76,7 +76,9 @@ export default {
           this.getBlogs()
       })
     }
-
+  },
+  created(){
+    
   },
   methods:{
     getBlogs(){

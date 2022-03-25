@@ -38,10 +38,19 @@ export const store = new Vuex.Store({
     },
     actions: {
       async getUserInfo ({commit, state}) {
-        const response = await axios.get('/user/'+state.route.params.user_name);
-        commit('SET_USER', response.data);
+        await axios.get('/user/'+state.route.params.user_name).then((response) => {
+          commit('SET_USER', response.data);
+          
+          this.dispatch('getUserSkills', response.data.id);
+          this.dispatch('getUserCertificates', response.data.id);
+          this.dispatch('getUserServices', response.data.id);
+          this.dispatch('getUserPortfolios', response.data.id);
+          this.dispatch('getUserLinks', response.data.id);
+          this.dispatch('getUserBlogs', response.data.id);
+        })
       },
       async getUserSkills ({commit}, user_id) {
+        console.log('SKILL')
         const response = await axios.get('/skills/'+user_id);
         commit('SET_SKILLS', response.data);
       },

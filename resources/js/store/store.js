@@ -50,7 +50,6 @@ export const store = new Vuex.Store({
         })
       },
       async getUserSkills ({commit}, user_id) {
-        console.log('SKILL')
         const response = await axios.get('/skills/'+user_id);
         commit('SET_SKILLS', response.data);
       },

@@ -6,7 +6,7 @@
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-        <nav id="navbar" class="navbar">
+        <nav id="navbar" class="navbar" :class="{'navbar-mobile': isAddClass}">
           <ul>
             <li><a class="nav-link scrollto active" href="#home" v-on:click="removehash()">Home</a></li>
             <li><a class="nav-link scrollto" href="#about" v-on:click="removehash()">About</a></li>
@@ -40,7 +40,7 @@
             </li> -->
             <li><a class="nav-link scrollto" href="#contact" v-on:click="removehash()">Contact</a></li>
           </ul>
-          <i class="bi bi-list mobile-nav-toggle"></i>
+          <i class="bi bi-list mobile-nav-toggle bi-list" :class="{'bi-x': isAddClass}" v-on:click="addClass()"></i>
         </nav>
         <!-- .navbar -->
       </div>
@@ -50,12 +50,20 @@
 
 <script>
 export default {
+  data() {
+    return {
+      isAddClass: false,
+    }      
+  },
   methods:{
     removehash(e){
       setTimeout(function(){
           history.replaceState("", document.title, window.location.pathname);
       }, 1);
     },
+    addClass(e) {
+        this.isAddClass = !this.isAddClass;
+    }
   }
 }
 </script>

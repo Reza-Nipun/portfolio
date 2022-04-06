@@ -21,7 +21,8 @@
             <div class="row" v-if="$store.state.user_info.resume">
               <div class="col-sm col-md col-lg">
                 <p class="hero-subtitle">
-                  <a v-bind:href="$store.state.user_info.resume" target="_blank" class="btn btn-success">GET MY RESUME <i class="bi bi-download"></i></a>
+                  <!-- <a v-bind:href="$store.state.user_info.resume" target="_blank" class="btn btn-success">GET MY RESUME <i class="bi bi-download"></i></a> -->
+                  <button @click="download($store.state.user_info.resume)" class="btn btn-success">GET MY RESUME <i class="bi bi-download"></i></button>
                 </p>
               </div>
             </div>
@@ -78,6 +79,22 @@ export default {
         })
 
       },
+      download(file) {
+        let fd = new FormData();
+        fd.append('file', file)
+        axios.post("/download_file", fd, {responseType: 'blob'})
+                .then(response => {
+                   const url = window.URL.createObjectURL(new Blob([response.data]));
+                  const link = document.createElement('a');
+                  link.href = url;
+                  link.setAttribute('download', file);
+                  document.body.appendChild(link);
+                  link.click();
+                })
+                .catch(e => {
+                console.log(e);
+                });
+      }
     }
 }
 </script>

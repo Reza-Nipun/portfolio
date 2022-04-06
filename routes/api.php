@@ -39,7 +39,11 @@ Route::get('/portfolios/{user_id}', [PortfolioController::class,'userPortfolios'
 Route::get('/blogs/{user_id}', [BlogController::class,'userBlogs']);
 Route::post('/send_message', [ContactController::class,'senderMessage']);
 
+Route::post('/download_file', [UserAuthController::class,'downloadFile']);
+
 Route::middleware('auth:api')->group(function () {
     Route::get('/users', [UserAuthController::class,'users']);
+    Route::get('/me', [UserAuthController::class,'me']);
+    Route::post('/update_user', [UserAuthController::class,'updateUser']);
     Route::get('/logout', [UserAuthController::class,'logout']);
 });

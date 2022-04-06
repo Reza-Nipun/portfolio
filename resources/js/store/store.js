@@ -37,6 +37,14 @@ export const store = new Vuex.Store({
       REMOVE_TOKEN: (state) => (state.token = null),
     },
     actions: {
+      async getUserProfile({state}) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer '+state.token
+        return await axios.get('/me')
+      },
+      async saveUserProfile({state}, data) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer '+state.token
+        return await axios.post('/update_user', data)
+      },
       async getUserInfo ({commit, state}) {
         await axios.get('/user/'+state.route.params.user_name).then((response) => {
           commit('SET_USER', response.data);

@@ -13,7 +13,7 @@
                         <router-link class="nav-link active" aria-current="page" :to="{name: 'Dashboard'}">Home</router-link>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                        <router-link class="nav-link" :to="{name: 'Profile'}">Profile</router-link>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link" href="#">Pricing</a>

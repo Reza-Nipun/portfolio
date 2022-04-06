@@ -18,5 +18,5 @@ Route::get('/{any?}', function () {
     return view('welcome');
 });
 Route::prefix('dashboard')->group(function () {
-    Route::get('/home', [HomeController::class,'index']);
+    Route::get('/{any?}', [HomeController::class,'index']);
 });

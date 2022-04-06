@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class UserAuthController extends Controller
 {
@@ -60,6 +63,45 @@ class UserAuthController extends Controller
         }
 
         return response()->json($user, 200);
+    }
+
+    public function me()
+    {
+        return response()->json(
+            Auth::user()
+        );
+    }
+
+    public function updateUser(Request $request)
+    {
+        $id = Auth::user()->id;
+        
+        $user = User::find($id);
+        $user->name = $request->name ?? $user->name;
+        $user->phone_number = $request->phone_number ?? $user->phone_number;
+        $user->address = $request->address ?? $user->address;
+        $user->profile_picture = $request->profile_picture ?? $user->profile_picture;
+        $user->cover_photo = $request->cover_photo ?? $user->cover_photo;
+        $user->profile_title = $request->profile_title ?? $user->profile_title;
+        $user->about_me = $request->about_me ?? $user->about_me;
+
+        if ($file = $request->file('resume')) {
+            Storage::delete($user->resume);
+
+            $path = $file->store('public/files');
+            $name = $file->getClientOriginalName();
+ 
+            $user->resume = $path;
+        }
+        
+        $user->save();
+
+        return response()->json($user);
+    }
+
+    public function downloadFile(Request $request)
+    {
+        return Storage::download($request->file);
     }
 
     public function logout(Request $request)

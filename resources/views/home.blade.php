@@ -11,7 +11,9 @@
     </head>
     <body>
         <div id="app">
-            <router-view></router-view>
+            <div class="container">
+                <router-view></router-view>
+            </div>
         </div>
         
         <!-- Vue JS -->

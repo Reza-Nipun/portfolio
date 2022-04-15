@@ -40,7 +40,8 @@
           <input type="file" class="form-control" @change="onChange">
         </div>
         <div class="col">
-          
+          <label>Profile Picture</label>
+          <input type="file" class="form-control" @change="onChangeProfilePic">
         </div>
       </div>
       <div class="row mt-3">
@@ -66,6 +67,7 @@ export default {
     return {
       user: {},
       resume: null,
+      profile_pic: null,
     }
   },
   components: {
@@ -87,6 +89,9 @@ export default {
     onChange(e){
         this.resume = e.target.files[0]
     },
+    onChangeProfilePic(e){
+        this.profile_pic = e.target.files[0]
+    },
     saveUserProfile() {
       let fd = new FormData();
       fd.append('name', this.user.name)
@@ -95,6 +100,7 @@ export default {
       fd.append('profile_title', this.user.profile_title)
       fd.append('about_me', this.user.about_me)
       fd.append('resume', this.resume)
+      fd.append('profile_pic', this.profile_pic)
       
 
       this.$store.dispatch('saveUserProfile', fd).then((response) => {

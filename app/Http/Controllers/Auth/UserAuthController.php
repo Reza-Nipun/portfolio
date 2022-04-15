@@ -74,6 +74,10 @@ class UserAuthController extends Controller
 
     public function updateUser(Request $request)
     {
+        // $this->validate($request, [
+        //     'resume' => 'mimes:doc,docx,pdf|max:5000',
+        //     'profile_pic' => 'image|mimes:jpeg,png,jpg|max:2048',
+        // ]);
         $id = Auth::user()->id;
         
         $user = User::find($id);
@@ -86,7 +90,9 @@ class UserAuthController extends Controller
         $user->about_me = $request->about_me ?? $user->about_me;
 
         if ($file = $request->file('resume')) {
-            Storage::delete($user->resume);
+            if(!empty($user->resume)){
+                Storage::delete($user->resume);
+            }
 
             $path = $file->store('public/files');
             $name = $file->getClientOriginalName();
@@ -94,6 +100,17 @@ class UserAuthController extends Controller
             $user->resume = $path;
         }
         
+        if($request->file('profile_pic')){
+            if(!empty($user->profile_picture)){
+                unlink(public_path($user->profile_picture));
+            }
+
+            $file= $request->file('profile_pic');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file->move(public_path('assets/img/profile_photos/'), $filename);
+            $user->profile_picture = 'assets/img/profile_photos/'.$filename;
+        }
+
         $user->save();
 
         return response()->json($user);

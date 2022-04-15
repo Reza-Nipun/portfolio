@@ -74,10 +74,10 @@ class UserAuthController extends Controller
 
     public function updateUser(Request $request)
     {
-        // $this->validate($request, [
-        //     'resume' => 'mimes:doc,docx,pdf|max:5000',
-        //     'profile_pic' => 'image|mimes:jpeg,png,jpg|max:2048',
-        // ]);
+        $this->validate($request, [
+            'resume' => 'mimes:doc,docx,pdf|max:5000',
+            'profile_pic' => 'image|mimes:jpeg,png,jpg|max:2048',
+        ]);
         $id = Auth::user()->id;
         
         $user = User::find($id);

@@ -3,7 +3,22 @@
     <!-- ======= Header ======= -->
     <AdminHeader></AdminHeader>
     <!-- End Header -->
-    <div class="mt-5"> 
+    <div class="mt-2"> 
+      <div class="row">
+        <div class="col">
+          <div v-if="errors_exist" class="alert alert-danger" role="alert">
+            <ul>
+              <div v-for="error in errors" v-bind:key="error">
+                <li>{{ error[0] }}</li>
+              </div>
+            </ul>
+          </div>
+          <div v-if="is_saved" class="alert alert-success" role="alert">
+            Successfully Saved!
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
       <div class="row">
         <div class="col">
           <label>Email</label>
@@ -37,11 +52,11 @@
       <div class="row mt-3">
         <div class="col">
           <label>Resume</label>
-          <input type="file" class="form-control" @change="onChange">
+          <input type="file" class="form-control" @change="onChange" ref="resume">
         </div>
         <div class="col">
           <label>Profile Picture</label>
-          <input type="file" class="form-control" @change="onChangeProfilePic">
+          <input type="file" class="form-control" @change="onChangeProfilePic" ref="profilePic">
         </div>
       </div>
       <div class="row mt-3">
@@ -68,6 +83,10 @@ export default {
       user: {},
       resume: null,
       profile_pic: null,
+      message: "",
+      errors: "",
+      is_saved: false,
+      errors_exist: false,
     }
   },
   components: {
@@ -99,14 +118,39 @@ export default {
       fd.append('address', this.user.address)
       fd.append('profile_title', this.user.profile_title)
       fd.append('about_me', this.user.about_me)
-      fd.append('resume', this.resume)
-      fd.append('profile_pic', this.profile_pic)
-      
+
+      if(this.resume !== null){
+        fd.append('resume', this.resume)
+      }
+
+      if(this.profile_pic !== null){
+        fd.append('profile_pic', this.profile_pic)
+      }
 
       this.$store.dispatch('saveUserProfile', fd).then((response) => {
-        this.user = response.data
-        console.log(response.data)
-      }).catch(err=>console.log(err))
+        this.is_saved = true;
+        this.errors_exist = false;
+
+        this.user = response.data;
+        this.message = "Successfully Saved!";
+
+        window.setTimeout( () => {
+          this.is_saved = false
+        }, 3000)
+
+        this.$refs.resume.value=null;
+        this.$refs.profilePic.value=null;
+      }).catch(error => {
+        if (error.response.status == 422){
+          this.errors_exist = true;
+          this.is_saved = false;
+          this.errors = error.response.data.errors;
+
+          window.setTimeout( () => {
+            this.errors_exist = false
+          }, 5000)
+        }
+      })
     }
   }
 };

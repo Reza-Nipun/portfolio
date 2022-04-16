@@ -137,7 +137,6 @@ export default {
               this.error = response.data.error_message
               this.loading = false;
             }else{
-              console.log(response.data)
               this.error = ''
               this.loading = false;
 

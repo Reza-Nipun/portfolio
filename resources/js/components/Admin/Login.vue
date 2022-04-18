@@ -141,13 +141,20 @@ export default {
               this.loading = false;
 
               if(response.data.token){
+                console.log(response.data)
                 // save the token
                 localStorage.setItem(
                   'portfolio_token',
                   response.data.token
                 )
 
+                localStorage.setItem(
+                  'user_name',
+                  response.data.user.user_name
+                )
+
                 this.$store.dispatch('setToken', response.data.token)
+                this.$store.dispatch('setLoggedInUserName', response.data.user.user_name)
 
                 window.location.replace('/dashboard/home')
               }

@@ -12,7 +12,7 @@
             <li><a class="nav-link scrollto" href="#about" v-on:click="removehash()">About</a></li>
             <li><a class="nav-link scrollto" href="#certifications" v-on:click="removehash()">Certifications</a></li>
             <li><a class="nav-link scrollto" href="#services" v-on:click="removehash()">Services</a></li>
-            <li><a class="nav-link scrollto" href="#work" v-on:click="removehash()">Portfolio</a></li>
+            <li><a class="nav-link scrollto" href="#work" v-on:click="removehash()">Projects</a></li>
             <li><a class="nav-link scrollto" href="#blog" v-on:click="removehash()">Blog</a></li>
             <!-- <li class="dropdown">
               <a href="#"

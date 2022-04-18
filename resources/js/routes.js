@@ -8,7 +8,7 @@ import DashboardLogout from './components/Admin/Logout.vue'
 export default [
     { path: '/', component: DefaultApp},
     { path: '/login', name: 'Login', component: Login, meta: { visitor: true }},
-    { path: '/:user_name', component: App},
+    { path: '/:user_name', name: 'Portfolio', component: App},
     { path: '/dashboard/home', name: 'Dashboard', component: DashboardApp, meta: { requiresAuth: true }},
     { path: '/dashboard/profile', name: 'Profile', component: DashboardProfile, meta: { requiresAuth: true }},
     { path: '/dashboard/logout', name: 'Logout', component: DashboardLogout, meta: { requiresAuth: true }},

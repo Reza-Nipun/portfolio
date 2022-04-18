@@ -2,7 +2,7 @@
     <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">TechExpertsBD</a>
+                <router-link class="navbar-brand" :to="{name: 'Portfolio', params: { user_name: this.$store.state.logged_in_user_name }}" target="_blank">TechExpertsBD</router-link>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
@@ -12,25 +12,32 @@
                     <li class="nav-item">
                         <router-link class="nav-link active" aria-current="page" :to="{name: 'Dashboard'}">Home</router-link>
                     </li>
-                    <li class="nav-item">
-                        <router-link class="nav-link" :to="{name: 'Profile'}">Profile</router-link>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sections
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><router-link class="dropdown-item" :to="{name: '/'}">Tags</router-link></li>
+                            <li><router-link class="dropdown-item" :to="{name: '/'}">Skills</router-link></li>
+                            <li><router-link class="dropdown-item" :to="{name: '/'}">Certifications</router-link></li>
+                            <li><router-link class="dropdown-item" :to="{name: '/'}">Services</router-link></li>
+                            <li><router-link class="dropdown-item" :to="{name: '/'}">Projects</router-link></li>
+                            <li><router-link class="dropdown-item" :to="{name: '/'}">Blogs</router-link></li>
+                            <li><router-link class="dropdown-item" :to="{name: '/'}">Social Links</router-link></li>
+                        </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown link
+                            My-Profile
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><router-link class="dropdown-item" :to="{name: 'Profile'}">Profile</router-link></li>
                             <li><router-link class="dropdown-item" :to="{name: 'Logout'}">Logout</router-link></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/nipun" target="_blank"> PortfolioSite</a>
-                    </li>
+                    <!-- <li class="nav-item">
+                        <router-link class="nav-link" aria-current="page" :to="{name: 'Portfolio', params: { user_name: this.$store.state.logged_in_user_name }}" target="_blank"> My-PortfolioSite</router-link>
+                    </li> -->
                 </ul>
                 </div>
             </div>

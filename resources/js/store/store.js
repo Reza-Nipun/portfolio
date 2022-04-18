@@ -15,6 +15,7 @@ export const store = new Vuex.Store({
       portfolios: {},
       links: {},
       blogs: {},
+      logged_in_user_name: localStorage.getItem('user_name') || null,
       token: localStorage.getItem('portfolio_token') || null,
     },
     getters: {
@@ -34,7 +35,11 @@ export const store = new Vuex.Store({
       SET_LINKS: (state, links) => (state.links = links),
       SET_BLOGS: (state, blogs) => (state.blogs = blogs),
       SET_TOKEN: (state, token) => (state.token = token),
-      REMOVE_TOKEN: (state) => (state.token = null),
+      SET_LOGGED_IN_USER_NAME: (state, logged_in_user_name) => (state.logged_in_user_name = logged_in_user_name),
+      REMOVE_TOKEN: (state) => {
+        state.token = null;
+        state.logged_in_user_name = null;
+      },
     },
     actions: {
       async getUserProfile({state}) {
@@ -90,14 +95,18 @@ export const store = new Vuex.Store({
       setToken({commit}, token) {
         commit('SET_TOKEN', token)
       },
+      setLoggedInUserName({commit}, user_name) {
+        commit('SET_LOGGED_IN_USER_NAME', user_name)
+      },
       async logout({state}) {
         axios.defaults.headers.common['Authorization'] = 'Bearer '+state.token
         return await axios.get('/logout')
       },
       removeToken({commit}){
-        if(localStorage.getItem('portfolio_token')){
+        if(localStorage.getItem('portfolio_token') || localStorage.getItem('user_name')){
           commit('REMOVE_TOKEN')
           localStorage.removeItem('portfolio_token');
+          localStorage.removeItem('user_name');
       }
       },
     },

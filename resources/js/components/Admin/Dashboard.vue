@@ -3,7 +3,7 @@
     <!-- ======= Header ======= -->
     <AdminHeader></AdminHeader>
     <!-- End Header -->
-    <h1>--------Dashboard-------</h1>
+    <h1>--------Welcome to your dashboard-------</h1>
     <!-- ======= Footer ======= -->
     <AdminFooter></AdminFooter>
     <!-- End  Footer -->
@@ -14,6 +14,7 @@
 
 import AdminHeader from './AdminHeader.vue';
 import AdminFooter from './AdminFooter.vue';
+import { store } from 'vuex';
 
 export default {
   components: {
@@ -24,13 +25,13 @@ export default {
     
   },
   mounted() {
-    console.log("Component mounted.");
+    // console.log("Component mounted.");
   },
   created(){
     
   },
   methods:{
-    // ...mapActions(["getUserInfo", "getUserSkills", "getUserCertificates", "getUserServices", "getUserPortfolios", "getUserLinks", "getUserBlogs"]),
+    
   }
 };
 </script>

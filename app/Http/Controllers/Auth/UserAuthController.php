@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Skill;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -47,7 +48,8 @@ class UserAuthController extends Controller
 
     }
 
-    public function users(){
+    public function users()
+    {
         return 'IN';
     }
 
@@ -122,6 +124,10 @@ class UserAuthController extends Controller
         return Storage::download($request->file);
     }
 
+    /**
+     * @param $request
+     * @return \Illuminate\Http\Response
+     */
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();

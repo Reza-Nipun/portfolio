@@ -5,11 +5,13 @@ import Routes from './routes'
 import { store } from './store/store'
 import VueMeta from 'vue-meta'
 import { sync } from 'vuex-router-sync'
+import Pagination from 'vue-pagination-2';
 
 require('./bootstrap');
 
 Vue.use(VueRouter)
 Vue.use(VueMeta)
+Vue.component('pagination', Pagination);
 
 const router = new VueRouter({
     routes: Routes,

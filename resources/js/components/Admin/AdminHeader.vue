@@ -17,8 +17,8 @@
                             Sections
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><router-link class="dropdown-item" :to="{name: '/'}">Tags</router-link></li>
-                            <li><router-link class="dropdown-item" :to="{name: '/'}">Skills</router-link></li>
+                            <li><router-link class="dropdown-item" :to="{name: 'Tags'}">Tags</router-link></li>
+                            <li><router-link class="dropdown-item" :to="{name: 'Skills'}">Skills</router-link></li>
                             <li><router-link class="dropdown-item" :to="{name: '/'}">Certifications</router-link></li>
                             <li><router-link class="dropdown-item" :to="{name: '/'}">Services</router-link></li>
                             <li><router-link class="dropdown-item" :to="{name: '/'}">Projects</router-link></li>

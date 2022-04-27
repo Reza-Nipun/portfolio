@@ -25,7 +25,7 @@ export default {
     
   },
   mounted() {
-    // console.log("Component mounted.");
+    document.title = 'Dashboard - Home'
   },
   created(){
     

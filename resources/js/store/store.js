@@ -50,6 +50,14 @@ export const store = new Vuex.Store({
         axios.defaults.headers.common['Authorization'] = 'Bearer '+state.token
         return await axios.get('/tags?page='+data)
       },
+      async getTagById({state}, tag_id) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer '+state.token
+        return await axios.get('/tag/'+tag_id)
+      },
+      async updateTag({state}, {id, tag_info}) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer '+state.token
+        return await axios.put('/tag/'+id, tag_info)
+      },
       async getUserWiseSkills({state}, data) {
         axios.defaults.headers.common['Authorization'] = 'Bearer '+state.token
         return await axios.get('/skills?page='+data)

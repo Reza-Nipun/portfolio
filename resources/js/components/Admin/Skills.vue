@@ -69,7 +69,6 @@ export default {
         this.skills = response.data
         this.total = response.data.total
         this.per_page = response.data.per_page
-        console.log(response.data)
       })
     }
   }

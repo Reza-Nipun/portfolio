@@ -35,4 +35,30 @@ class TagController extends Controller
 
         return response()->json($tags, 200);
     }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getTagById(Request $request)
+    {
+        $tag_id = $request->route('id');
+
+        $tag = Tag::find($tag_id);
+
+        if (!$tag) {
+            return response()->json(["message" => "Tag not found!"], 404);
+        }
+
+        return response()->json($tag, 200);
+    }
+
+    public function updateTag($id, Request $request)
+    {
+        $tag = Tag::find($id);
+        $tag->tag = $request->tag ?? $tag->tag;
+        $tag->save();
+
+        return response()->json('Tag updated!');
+    }
 }

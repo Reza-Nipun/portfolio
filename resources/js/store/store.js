@@ -62,6 +62,14 @@ export const store = new Vuex.Store({
         axios.defaults.headers.common['Authorization'] = 'Bearer '+state.token
         return await axios.get('/skills?page='+data)
       },
+      async getSkillById({state}, skill_id) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer '+state.token
+        return await axios.get('/skill/'+skill_id)
+      },
+      async updateSkill({state}, {id, skill_info}) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer '+state.token
+        return await axios.put('/skill/'+id, skill_info)
+      },
       async saveUserProfile({state}, data) {
         axios.defaults.headers.common['Authorization'] = 'Bearer '+state.token
         return await axios.post('/update_user', data)

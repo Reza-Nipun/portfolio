@@ -5732,6 +5732,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5740,7 +5763,8 @@ __webpack_require__.r(__webpack_exports__);
       page: 1,
       total: 0,
       per_page: 0,
-      skills: {}
+      skills: {},
+      skill_info: {}
     };
   },
   components: {
@@ -5763,6 +5787,32 @@ __webpack_require__.r(__webpack_exports__);
         _this.total = response.data.total;
         _this.per_page = response.data.per_page;
       });
+    },
+    getSkillById: function getSkillById(skill_id) {
+      var _this2 = this;
+
+      this.$store.dispatch('getSkillById', skill_id).then(function (response) {
+        _this2.skill_info = response.data;
+        $("#exampleModal").modal('show');
+      });
+    },
+    updateSkill: function updateSkill() {
+      var _this3 = this;
+
+      var id = this.skill_info.id;
+      var skill_info = this.skill_info;
+      this.$store.dispatch('updateSkill', {
+        id: id,
+        skill_info: skill_info
+      }).then(function (response) {
+        _this3.skill_info = {};
+        $("#exampleModal").modal('hide');
+
+        _this3.getUserSkills(_this3.page);
+      });
+    },
+    modalHide: function modalHide() {
+      $("#exampleModal").modal('hide');
     }
   }
 });
@@ -7506,7 +7556,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
         }, _callee5);
       }))();
     },
-    saveUserProfile: function saveUserProfile(_ref7, data) {
+    getSkillById: function getSkillById(_ref7, skill_id) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
         var state;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
@@ -7516,7 +7566,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
                 state = _ref7.state;
                 (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.headers.common.Authorization) = 'Bearer ' + state.token;
                 _context6.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().post('/update_user', data);
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/skill/' + skill_id);
 
               case 4:
                 return _context6.abrupt("return", _context6.sent);
@@ -7529,17 +7579,64 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
         }, _callee6);
       }))();
     },
-    getUserInfo: function getUserInfo(_ref8) {
-      var _this = this;
-
+    updateSkill: function updateSkill(_ref8, _ref9) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
-        var commit, state;
+        var state, id, skill_info;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
           while (1) {
             switch (_context7.prev = _context7.next) {
               case 0:
-                commit = _ref8.commit, state = _ref8.state;
-                _context7.next = 3;
+                state = _ref8.state;
+                id = _ref9.id, skill_info = _ref9.skill_info;
+                (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.headers.common.Authorization) = 'Bearer ' + state.token;
+                _context7.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().put('/skill/' + id, skill_info);
+
+              case 5:
+                return _context7.abrupt("return", _context7.sent);
+
+              case 6:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
+      }))();
+    },
+    saveUserProfile: function saveUserProfile(_ref10, data) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+        var state;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                state = _ref10.state;
+                (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.headers.common.Authorization) = 'Bearer ' + state.token;
+                _context8.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().post('/update_user', data);
+
+              case 4:
+                return _context8.abrupt("return", _context8.sent);
+
+              case 5:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8);
+      }))();
+    },
+    getUserInfo: function getUserInfo(_ref11) {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
+        var commit, state;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+          while (1) {
+            switch (_context9.prev = _context9.next) {
+              case 0:
+                commit = _ref11.commit, state = _ref11.state;
+                _context9.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/user/' + state.route.params.user_name).then(function (response) {
                   commit('SET_USER', response.data);
 
@@ -7558,72 +7655,26 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
 
               case 3:
               case "end":
-                return _context7.stop();
-            }
-          }
-        }, _callee7);
-      }))();
-    },
-    getUserSkills: function getUserSkills(_ref9, user_id) {
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-        var commit, response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
-          while (1) {
-            switch (_context8.prev = _context8.next) {
-              case 0:
-                commit = _ref9.commit;
-                _context8.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/skills/' + user_id);
-
-              case 3:
-                response = _context8.sent;
-                commit('SET_SKILLS', response.data);
-
-              case 5:
-              case "end":
-                return _context8.stop();
-            }
-          }
-        }, _callee8);
-      }))();
-    },
-    getUserCertificates: function getUserCertificates(_ref10, user_id) {
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
-        var commit, response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
-          while (1) {
-            switch (_context9.prev = _context9.next) {
-              case 0:
-                commit = _ref10.commit;
-                _context9.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/certificates/' + user_id);
-
-              case 3:
-                response = _context9.sent;
-                commit('SET_CERTIFICATES', response.data);
-
-              case 5:
-              case "end":
                 return _context9.stop();
             }
           }
         }, _callee9);
       }))();
     },
-    getUserServices: function getUserServices(_ref11, user_id) {
+    getUserSkills: function getUserSkills(_ref12, user_id) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
         var commit, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
           while (1) {
             switch (_context10.prev = _context10.next) {
               case 0:
-                commit = _ref11.commit;
+                commit = _ref12.commit;
                 _context10.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/services/' + user_id);
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/skills/' + user_id);
 
               case 3:
                 response = _context10.sent;
-                commit('SET_SERVICES', response.data);
+                commit('SET_SKILLS', response.data);
 
               case 5:
               case "end":
@@ -7633,20 +7684,20 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
         }, _callee10);
       }))();
     },
-    getUserPortfolios: function getUserPortfolios(_ref12, user_id) {
+    getUserCertificates: function getUserCertificates(_ref13, user_id) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
         var commit, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
           while (1) {
             switch (_context11.prev = _context11.next) {
               case 0:
-                commit = _ref12.commit;
+                commit = _ref13.commit;
                 _context11.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/portfolios/' + user_id);
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/certificates/' + user_id);
 
               case 3:
                 response = _context11.sent;
-                commit('SET_PORTFOLIOS', response.data);
+                commit('SET_CERTIFICATES', response.data);
 
               case 5:
               case "end":
@@ -7656,20 +7707,20 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
         }, _callee11);
       }))();
     },
-    getUserLinks: function getUserLinks(_ref13, user_id) {
+    getUserServices: function getUserServices(_ref14, user_id) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12() {
         var commit, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee12$(_context12) {
           while (1) {
             switch (_context12.prev = _context12.next) {
               case 0:
-                commit = _ref13.commit;
+                commit = _ref14.commit;
                 _context12.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/links/' + user_id);
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/services/' + user_id);
 
               case 3:
                 response = _context12.sent;
-                commit('SET_LINKS', response.data);
+                commit('SET_SERVICES', response.data);
 
               case 5:
               case "end":
@@ -7679,20 +7730,20 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
         }, _callee12);
       }))();
     },
-    getUserBlogs: function getUserBlogs(_ref14, user_id) {
+    getUserPortfolios: function getUserPortfolios(_ref15, user_id) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13() {
         var commit, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee13$(_context13) {
           while (1) {
             switch (_context13.prev = _context13.next) {
               case 0:
-                commit = _ref14.commit;
+                commit = _ref15.commit;
                 _context13.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/blogs/' + user_id);
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/portfolios/' + user_id);
 
               case 3:
                 response = _context13.sent;
-                commit('SET_BLOGS', response.data);
+                commit('SET_PORTFOLIOS', response.data);
 
               case 5:
               case "end":
@@ -7702,21 +7753,22 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
         }, _callee13);
       }))();
     },
-    sendMessage: function sendMessage(_ref15, data) {
+    getUserLinks: function getUserLinks(_ref16, user_id) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee14() {
+        var commit, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee14$(_context14) {
           while (1) {
             switch (_context14.prev = _context14.next) {
               case 0:
-                _objectDestructuringEmpty(_ref15);
-
+                commit = _ref16.commit;
                 _context14.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().post('/send_message', data);
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/links/' + user_id);
 
               case 3:
-                return _context14.abrupt("return", _context14.sent);
+                response = _context14.sent;
+                commit('SET_LINKS', response.data);
 
-              case 4:
+              case 5:
               case "end":
                 return _context14.stop();
             }
@@ -7724,21 +7776,22 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
         }, _callee14);
       }))();
     },
-    login: function login(_ref16, data) {
+    getUserBlogs: function getUserBlogs(_ref17, user_id) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee15() {
+        var commit, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee15$(_context15) {
           while (1) {
             switch (_context15.prev = _context15.next) {
               case 0:
-                _objectDestructuringEmpty(_ref16);
-
+                commit = _ref17.commit;
                 _context15.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().post('/login', data);
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/blogs/' + user_id);
 
               case 3:
-                return _context15.abrupt("return", _context15.sent);
+                response = _context15.sent;
+                commit('SET_BLOGS', response.data);
 
-              case 4:
+              case 5:
               case "end":
                 return _context15.stop();
             }
@@ -7746,30 +7799,21 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
         }, _callee15);
       }))();
     },
-    setToken: function setToken(_ref17, token) {
-      var commit = _ref17.commit;
-      commit('SET_TOKEN', token);
-    },
-    setLoggedInUserName: function setLoggedInUserName(_ref18, user_name) {
-      var commit = _ref18.commit;
-      commit('SET_LOGGED_IN_USER_NAME', user_name);
-    },
-    logout: function logout(_ref19) {
+    sendMessage: function sendMessage(_ref18, data) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee16() {
-        var state;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee16$(_context16) {
           while (1) {
             switch (_context16.prev = _context16.next) {
               case 0:
-                state = _ref19.state;
-                (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.headers.common.Authorization) = 'Bearer ' + state.token;
-                _context16.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/logout');
+                _objectDestructuringEmpty(_ref18);
 
-              case 4:
+                _context16.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().post('/send_message', data);
+
+              case 3:
                 return _context16.abrupt("return", _context16.sent);
 
-              case 5:
+              case 4:
               case "end":
                 return _context16.stop();
             }
@@ -7777,8 +7821,61 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
         }, _callee16);
       }))();
     },
-    removeToken: function removeToken(_ref20) {
+    login: function login(_ref19, data) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee17() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee17$(_context17) {
+          while (1) {
+            switch (_context17.prev = _context17.next) {
+              case 0:
+                _objectDestructuringEmpty(_ref19);
+
+                _context17.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().post('/login', data);
+
+              case 3:
+                return _context17.abrupt("return", _context17.sent);
+
+              case 4:
+              case "end":
+                return _context17.stop();
+            }
+          }
+        }, _callee17);
+      }))();
+    },
+    setToken: function setToken(_ref20, token) {
       var commit = _ref20.commit;
+      commit('SET_TOKEN', token);
+    },
+    setLoggedInUserName: function setLoggedInUserName(_ref21, user_name) {
+      var commit = _ref21.commit;
+      commit('SET_LOGGED_IN_USER_NAME', user_name);
+    },
+    logout: function logout(_ref22) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee18() {
+        var state;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee18$(_context18) {
+          while (1) {
+            switch (_context18.prev = _context18.next) {
+              case 0:
+                state = _ref22.state;
+                (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.headers.common.Authorization) = 'Bearer ' + state.token;
+                _context18.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/logout');
+
+              case 4:
+                return _context18.abrupt("return", _context18.sent);
+
+              case 5:
+              case "end":
+                return _context18.stop();
+            }
+          }
+        }, _callee18);
+      }))();
+    },
+    removeToken: function removeToken(_ref23) {
+      var commit = _ref23.commit;
 
       if (localStorage.getItem('portfolio_token') || localStorage.getItem('user_name')) {
         commit('REMOVE_TOKEN');
@@ -35421,7 +35518,21 @@ var render = function () {
                 _vm._v(_vm._s(skill.score)),
               ]),
               _vm._v(" "),
-              _vm._m(1, true),
+              _c("td", { staticClass: "text-center" }, [
+                _c(
+                  "span",
+                  {
+                    staticClass: "btn btn-sm btn-primary",
+                    attrs: { "data-toggle": "modal" },
+                    on: {
+                      click: function ($event) {
+                        return _vm.getSkillById(skill.id)
+                      },
+                    },
+                  },
+                  [_vm._v("Edit")]
+                ),
+              ]),
             ])
           }),
           0
@@ -35450,6 +35561,139 @@ var render = function () {
       ]),
       _vm._v(" "),
       _c("AdminFooter"),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "exampleModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true",
+          },
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "h5",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "exampleModalLabel" },
+                    },
+                    [_vm._v("Update Skill")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "close",
+                      attrs: {
+                        type: "button",
+                        "data-dismiss": "modal",
+                        "aria-label": "Close",
+                      },
+                      on: {
+                        click: function ($event) {
+                          return _vm.modalHide()
+                        },
+                      },
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×"),
+                      ]),
+                    ]
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _vm._v("\n          Skill: "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.skill_info.skill,
+                        expression: "skill_info.skill",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", name: "tag" },
+                    domProps: { value: _vm.skill_info.skill },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.skill_info, "skill", $event.target.value)
+                      },
+                    },
+                  }),
+                  _vm._v("\n          Score: "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.skill_info.score,
+                        expression: "skill_info.score",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", name: "score" },
+                    domProps: { value: _vm.skill_info.score },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.skill_info, "score", $event.target.value)
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button", "data-dismiss": "modal" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.modalHide()
+                        },
+                      },
+                    },
+                    [_vm._v("Close")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.updateSkill()
+                        },
+                      },
+                    },
+                    [_vm._v("Save changes")]
+                  ),
+                ]),
+              ]),
+            ]
+          ),
+        ]
+      ),
     ],
     1
   )
@@ -35466,16 +35710,6 @@ var staticRenderFns = [
         _c("th", { staticClass: "text-center" }, [_vm._v("SCORE")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("ACTION")]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "text-center" }, [
-      _c("a", { staticClass: "btn btn-sm btn-primary", attrs: { href: "#" } }, [
-        _vm._v("Edit"),
       ]),
     ])
   },

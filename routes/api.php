@@ -45,10 +45,15 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/users', [UserAuthController::class,'users']);
     Route::get('/me', [UserAuthController::class,'me']);
     Route::post('/update_user', [UserAuthController::class,'updateUser']);
+
     Route::get('/skills', [SkillController::class,'getUserWiseSkills']);
+    Route::get('/skill/{id}', [SkillController::class,'getSkillById']);
+    Route::put('/skill/{id}', [SkillController::class,'updateSkill']);
+
     Route::get('/tags', [TagController::class,'getUserWiseTags']);
     Route::get('/tag/{id}', [TagController::class,'getTagById']);
     Route::put('/tag/{id}', [TagController::class,'updateTag']);
+    
     Route::get('/services', [ServiceController::class,'getUserWiseServices']);
     Route::get('/links', [LinksController::class,'getUserWiseLinks']);
     Route::get('/certificates', [CertificateController::class,'getUserWiseCertificates']);

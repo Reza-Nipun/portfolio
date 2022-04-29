@@ -53,6 +53,11 @@ class TagController extends Controller
         return response()->json($tag, 200);
     }
 
+    /**
+     * @param $id
+     * @param $request
+     * @return \Illuminate\Http\Response
+     */
     public function updateTag($id, Request $request)
     {
         $tag = Tag::find($id);

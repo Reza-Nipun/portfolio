@@ -34,4 +34,37 @@ class SkillController extends Controller
 
         return response()->json($skills, 200);
     }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getSkillById(Request $request)
+    {
+        $skill_id = $request->route('id');
+
+        $skill = SKill::find($skill_id);
+
+        if (!$skill) {
+            return response()->json(["message" => "Skill not found!"], 404);
+        }
+
+        return response()->json($skill, 200);
+    }
+
+    /**
+     * @param $id
+     * @param $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateSkill($id, Request $request)
+    {
+        $skill = Skill::find($id);
+        $skill->skill = $request->skill ?? $skill->skill;
+        $skill->score = $request->score ?? $skill->score;
+        $skill->status = $request->status ?? $skill->status;
+        $skill->save();
+
+        return response()->json('Skill updated!');
+    }
 }

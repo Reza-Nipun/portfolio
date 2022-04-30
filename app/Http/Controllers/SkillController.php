@@ -36,7 +36,7 @@ class SkillController extends Controller
     }
 
     /**
-     * @param $id
+     * @param $request
      * @return \Illuminate\Http\Response
      */
     public function getSkillById(Request $request)

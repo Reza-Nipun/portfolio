@@ -37,7 +37,7 @@ class TagController extends Controller
     }
 
     /**
-     * @param $id
+     * @param $request
      * @return \Illuminate\Http\Response
      */
     public function getTagById(Request $request)

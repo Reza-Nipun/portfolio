@@ -32,7 +32,7 @@
       <div class="row mt-3">
         <div class="col">
           <label>About</label>
-          <textarea class="form-control" placeholder="About You" v-model="user.about_me"></textarea>
+          <vue-editor v-model="user.about_me"></vue-editor>
         </div>
         <div class="col">
           <label>Name</label>

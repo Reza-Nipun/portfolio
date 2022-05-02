@@ -76,7 +76,7 @@
                           <option value="1">Yes</option>
                           <option value="0">No</option>
                         </select>
-            Description: <textarea class="form-control" v-model="certification_info.description"></textarea>
+            Description: <vue-editor v-model="certification_info.description"></vue-editor>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="modalHide()">Close</button>

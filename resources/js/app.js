@@ -6,12 +6,14 @@ import { store } from './store/store'
 import VueMeta from 'vue-meta'
 import { sync } from 'vuex-router-sync'
 import Pagination from 'vue-pagination-2';
+import { VueEditor } from "vue2-editor";
 
 require('./bootstrap');
 
 Vue.use(VueRouter)
 Vue.use(VueMeta)
 Vue.component('pagination', Pagination);
+Vue.component('vue-editor', VueEditor);
 
 const router = new VueRouter({
     routes: Routes,

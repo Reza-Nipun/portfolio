@@ -20,7 +20,7 @@
                             <li><router-link class="dropdown-item" :to="{name: 'Tags'}">Tags</router-link></li>
                             <li><router-link class="dropdown-item" :to="{name: 'Skills'}">Skills</router-link></li>
                             <li><router-link class="dropdown-item" :to="{name: 'Certifications'}">Certifications</router-link></li>
-                            <li><router-link class="dropdown-item" :to="{name: '/'}">Services</router-link></li>
+                            <li><router-link class="dropdown-item" :to="{name: 'Services'}">Services</router-link></li>
                             <li><router-link class="dropdown-item" :to="{name: '/'}">Projects</router-link></li>
                             <li><router-link class="dropdown-item" :to="{name: '/'}">Blogs</router-link></li>
                             <li><router-link class="dropdown-item" :to="{name: '/'}">Social Links</router-link></li>

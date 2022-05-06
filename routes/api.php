@@ -55,6 +55,9 @@ Route::middleware('auth:api')->group(function () {
     Route::put('/tag/{id}', [TagController::class,'updateTag']);
     
     Route::get('/services', [ServiceController::class,'getUserWiseServices']);
+    Route::get('/service/{id}', [ServiceController::class,'getServiceById']);
+    Route::put('/service/{id}', [ServiceController::class,'updateService']);
+
     Route::get('/links', [LinksController::class,'getUserWiseLinks']);
     
     Route::get('/certificates', [CertificateController::class,'getUserWiseCertificates']);

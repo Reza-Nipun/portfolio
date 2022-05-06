@@ -6,6 +6,7 @@ import DashboardProfile from './components/Admin/Profile.vue'
 import DashboardTags from './components/Admin/Tags.vue'
 import DashboardSkills from './components/Admin/Skills.vue'
 import DashboardCertifications from './components/Admin/Certifications.vue'
+import DashboardServices from './components/Admin/Services.vue'
 import DashboardLogout from './components/Admin/Logout.vue'
 
 export default [
@@ -17,5 +18,6 @@ export default [
     { path: '/dashboard/tags', name: 'Tags', component: DashboardTags, meta: { requiresAuth: true }},
     { path: '/dashboard/skills', name: 'Skills', component: DashboardSkills, meta: { requiresAuth: true }},
     { path: '/dashboard/certifications', name: 'Certifications', component: DashboardCertifications, meta: { requiresAuth: true }},
+    { path: '/dashboard/services', name: 'Services', component: DashboardServices, meta: { requiresAuth: true }},
     { path: '/dashboard/logout', name: 'Logout', component: DashboardLogout, meta: { requiresAuth: true }},
 ]

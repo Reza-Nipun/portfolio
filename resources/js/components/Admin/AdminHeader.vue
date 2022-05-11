@@ -23,7 +23,7 @@
                             <li><router-link class="dropdown-item" :to="{name: 'Services'}">Services</router-link></li>
                             <li><router-link class="dropdown-item" :to="{name: '/'}">Projects</router-link></li>
                             <li><router-link class="dropdown-item" :to="{name: '/'}">Blogs</router-link></li>
-                            <li><router-link class="dropdown-item" :to="{name: '/'}">Social Links</router-link></li>
+                            <li><router-link class="dropdown-item" :to="{name: 'SocialLinks'}">Social Links</router-link></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

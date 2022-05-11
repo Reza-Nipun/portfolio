@@ -98,6 +98,18 @@ export const store = new Vuex.Store({
         axios.defaults.headers.common['Authorization'] = 'Bearer '+state.token
         return await axios.post('/service/'+id, postData.form_data)
       },
+      async getUserSocialLinks({state}, data) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer '+state.token
+        return await axios.get('/links?page='+data)
+      },
+      async getSocialLinkById({state}, link_id) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer '+state.token
+        return await axios.get('/link/'+link_id)
+      },
+      async updateSocialLink({state}, {id, social_link_info}) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer '+state.token
+        return await axios.put('/link/'+id, social_link_info)
+      },
       async saveUserProfile({state}, data) {
         axios.defaults.headers.common['Authorization'] = 'Bearer '+state.token
         return await axios.post('/update_user', data)

@@ -8,6 +8,7 @@ import DashboardSkills from './components/Admin/Skills.vue'
 import DashboardCertifications from './components/Admin/Certifications.vue'
 import DashboardServices from './components/Admin/Services.vue'
 import DashboardSocialLinks from './components/Admin/SocialLinks.vue'
+import DashboardPortfolios from './components/Admin/Portfolios.vue'
 import DashboardLogout from './components/Admin/Logout.vue'
 
 export default [
@@ -21,5 +22,6 @@ export default [
     { path: '/dashboard/certifications', name: 'Certifications', component: DashboardCertifications, meta: { requiresAuth: true }},
     { path: '/dashboard/services', name: 'Services', component: DashboardServices, meta: { requiresAuth: true }},
     { path: '/dashboard/social_links', name: 'SocialLinks', component: DashboardSocialLinks, meta: { requiresAuth: true }},
+    { path: '/dashboard/portfolios', name: 'Portfolios', component: DashboardPortfolios, meta: { requiresAuth: true }},
     { path: '/dashboard/logout', name: 'Logout', component: DashboardLogout, meta: { requiresAuth: true }},
 ]

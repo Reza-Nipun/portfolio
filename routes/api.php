@@ -67,6 +67,9 @@ Route::middleware('auth:api')->group(function () {
     Route::put('/certificate/{id}', [CertificateController::class,'updateCertificate']);
 
     Route::get('/portfolios', [PortfolioController::class,'getUserWisePortfolios']);
+    Route::get('portfolio/{id}', [PortfolioController::class, 'getPortfolioById']);
+    Route::put('portfolio/{id}', [PortfolioController::class, 'updatePortfolio']);
+
     Route::get('/blogs', [BlogController::class,'getUserWiseBlogs']);
     Route::get('/logout', [UserAuthController::class,'logout']);
 });

@@ -31,9 +31,7 @@
                     <a v-bind:href=blog.blog_url target="_blank" v-if="blog.title">{{ blog.title }}</a>
                     <span class="bi bi-link-45deg"></span>
                   </h3>
-                  <p class="card-description" v-if="blog.description">
-                    {{ blog.description }}
-                  </p>
+                  <p class="card-description" v-if="blog.description" v-html="blog.description.substring(0,50)+'...'"></p>
                 </div>
                 <!-- <div class="card-footer">
                   <div class="post-author">

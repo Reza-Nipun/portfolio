@@ -71,5 +71,8 @@ Route::middleware('auth:api')->group(function () {
     Route::put('portfolio/{id}', [PortfolioController::class, 'updatePortfolio']);
 
     Route::get('/blogs', [BlogController::class,'getUserWiseBlogs']);
+    Route::get('/blog/{id}', [BlogController::class, 'getBlogById']);
+    Route::put('/blog/{id}', [BlogController::class, 'updateBlog']);
+
     Route::get('/logout', [UserAuthController::class,'logout']);
 });

@@ -96,7 +96,13 @@ export const store = new Vuex.Store({
         let id = postData.id;
 
         axios.defaults.headers.common['Authorization'] = 'Bearer '+state.token
-        return await axios.post('/service/'+id, postData.form_data)
+
+        if(typeof id !== 'undefined'){
+          return await axios.post('/service/'+id, postData.form_data)
+        } else {
+          return await axios.post('/service/create', postData.form_data)
+        }
+        
       },
       async getUserSocialLinks({state}, data) {
         axios.defaults.headers.common['Authorization'] = 'Bearer '+state.token

@@ -4,7 +4,19 @@
     <AdminHeader></AdminHeader>
     <!-- End Header -->
     
-  <h2>Services</h2>  
+  <div class="row mt-2">
+    <div class="col">
+      <h2>Services</h2> 
+    </div>
+    <div class="col d-flex justify-content-end">
+      <button type="button" class="btn btn-success" data-toggle="modal" v-on:click="createNewService()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+      </button>
+    </div>
+  </div> 
   <div class="row mt-2">
     <div class="col">
       <div v-if="errors_exist" class="alert alert-danger" role="alert">
@@ -14,8 +26,8 @@
           </div>
         </ul>
       </div>
-      <div v-if="is_saved" class="alert alert-success" role="alert">
-        Successfully Saved!
+      <div v-if="is_saved" class="alert alert-success" role="alert" v-text="message">
+        
       </div>
     </div>
     <div class="col"></div>
@@ -63,7 +75,7 @@
     <AdminFooter></AdminFooter>
     <!-- End  Footer -->
 
-    <!-- Modal -->
+    <!-- Update Modal -->
     <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -102,6 +114,45 @@
       </div>
     </div>
 
+    <!-- Create Modal -->
+    <div class="modal fade bd-example-modal-lg" id="createServiceModal" tabindex="-1" role="dialog" aria-labelledby="createServiceModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createServiceModalLabel">Create Service</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="modalHide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            COMPANY: <input type="text" class="form-control" v-model="new_service_info.company_name"/>
+            Image: <input type="file" class="form-control"  @change="onChange" ref="service"/>
+            Website: <input type="text" class="form-control" v-model="new_service_info.company_website"/>
+            Address: <input type="text" class="form-control" v-model="new_service_info.company_address"/>
+            Contact: <input type="text" class="form-control" v-model="new_service_info.company_contact_info"/>
+            Designation: <input type="text" class="form-control" v-model="new_service_info.designation"/>
+            From: <input type="date" class="form-control" v-model="new_service_info.from_date"/>
+            To: <input type="date" class="form-control" v-model="new_service_info.to_date"/>
+            Continuing?: <select class="form-control" v-model="new_service_info.is_continuing">
+                          <option value="1">Yes</option>
+                          <option value="0">No</option>
+                        </select>
+            Type: <select class="form-control" v-model="new_service_info.type">
+                          <option value="0">Full-Time</option>
+                          <option value="1">Part-Time</option>
+                          <option value="2">Freelancing</option>
+                          <option value="3">Contructual</option>
+                        </select>
+            Description: <vue-editor v-model="new_service_info.job_description"></vue-editor>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="modalHide()">Close</button>
+            <button type="button" class="btn btn-primary" v-on:click="saveNewService()">Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -118,6 +169,18 @@ export default {
       per_page: 0,
       services: {},
       service_info:{},
+      new_service_info:{
+        company_name: '',
+        company_website: '',
+        company_address: '',
+        company_contact_info: '',
+        designation: '',
+        from_date: '',
+        to_date: '',
+        is_continuing: '',
+        type: '',
+        job_description: '',
+      },
       service: null,
       message: "",
       is_saved: false,
@@ -151,6 +214,60 @@ export default {
       this.$store.dispatch('getServiceById', service_id).then((response) => {
         this.service_info = response.data
         $("#exampleModal").modal('show');
+      })
+    },
+    createNewService(){
+      $("#createServiceModal").modal('show');
+    },
+    saveNewService() {
+      console.log(this.new_service_info.company_name)
+      let fd = new FormData();
+      fd.append("_method", "POST")
+      fd.append('company_name', this.new_service_info.company_name)
+      fd.append('company_website', this.new_service_info.company_website)
+      fd.append('company_address', this.new_service_info.company_address)
+      fd.append('company_contact_info', this.new_service_info.company_contact_info)
+      fd.append('designation', this.new_service_info.designation)
+      fd.append('from_date', this.new_service_info.from_date)
+      fd.append('to_date', this.new_service_info.to_date)
+      fd.append('is_continuing', this.new_service_info.is_continuing)
+      fd.append('type', this.new_service_info.type)
+      fd.append('job_description', this.new_service_info.job_description)
+
+      const postData = {
+        id: this.new_service_info.id,
+        form_data: fd
+      };
+
+      if(this.service !== null){
+        fd.append('company_logo', this.service)
+      }
+
+      this.$store.dispatch('saveUserService', postData).then((response) => {
+        this.is_saved = true;
+        this.errors_exist = false;
+        $("#createServiceModal").modal('hide');
+        this.getUserWiseServices(this.page);
+        this.message = response.data;
+
+        window.setTimeout( () => {
+          this.is_saved = false
+        }, 3000)
+
+        this.$refs.service.value=null;
+      }).catch(error => {
+        if (error.response.status == 422){
+          $("#createServiceModal").modal('hide');
+          this.$refs.service.value=null;
+
+          this.errors_exist = true;
+          this.is_saved = false;
+          this.errors = error.response.data.errors;
+
+          window.setTimeout( () => {
+            this.errors_exist = false
+          }, 5000)
+        }
       })
     },
     updateService() {
@@ -208,6 +325,7 @@ export default {
     },
     modalHide(){
       $("#exampleModal").modal('hide');
+      $("#createServiceModal").modal('hide');
     }
   }
 };

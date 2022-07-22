@@ -57,6 +57,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/services', [ServiceController::class,'getUserWiseServices']);
     Route::get('/service/{id}', [ServiceController::class,'getServiceById']);
     Route::put('/service/{id}', [ServiceController::class,'updateService']);
+    Route::post('/service/create', [ServiceController::class,'createService']);
 
     Route::get('/links', [LinksController::class,'getUserWiseLinks']);
     Route::get('/link/{id}', [LinksController::class,'getLinkById']);
